@@ -30,7 +30,7 @@
     echo "<br>";
     echo $row["Address"];
 
-    $result2 = mysqli_query($mysql, "SELECT * FROM feedbacks WHERE user_id = ". $user_id ."");
+    $result2 = mysqli_query($mysql, "SELECT * FROM feedbacks WHERE place_id = ". $placeId ."");
 
     $content = "";
 
@@ -49,7 +49,7 @@
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $rating = $_POST["rating"];
 
-        $sql = "SELECT id FROM feedbacks WHERE user_id = " . $user_id . "";
+        $sql = "SELECT id FROM feedbacks WHERE place_id = " . $placeId . "";
         $result1 = mysqli_query($mysql, $sql);
 
         if (mysqli_num_rows($result1) > 0) {

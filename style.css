@@ -48,3 +48,7 @@
 .rate-area > label:active {
 	position: relative;
 }
+.logo {
+    width: 50%;
+    height: 90%;
+}
