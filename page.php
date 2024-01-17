@@ -20,15 +20,16 @@
     $row = mysqli_fetch_assoc($result);
 
     $placeId = $row["id"];
-
+    if (isset($_SESSION['login'])){
     $query = "select id from users where login = '" . $_SESSION['login'] . "'";
     $result = mysqli_query($mysql, $query);
     $row1 = mysqli_fetch_assoc($result);
     $user_id = $row1['id'];
-
+    }
     echo $row["Name"];
     echo "<br>";
     echo $row["Address"];
+    
 
     $result2 = mysqli_query($mysql, "SELECT * FROM feedbacks WHERE place_id = ". $placeId ."");
 
