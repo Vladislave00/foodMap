@@ -17,7 +17,7 @@
     include('session.php');
     include('header.php');
 
-    $result = mysqli_query($mysql, "SELECT * FROM `places` limit 3000");
+    $result = mysqli_query($mysql, "SELECT * FROM `places`");
     while ($row = mysqli_fetch_assoc($result)) {
         $ar[] = $row;
     }
@@ -114,7 +114,7 @@
                     iconLayout: 'default#image',
                     iconImageHref: imgHref,
                     iconImageSize: [30, 30],
-                    iconImageOffset: [-19, -30]
+                    iconImageOffset: [-20, -23]
                 });
                 myCollection = new ymaps.GeoObjectCollection();
                 switch ("<?php echo $row['TypeObject'] ?>") {
@@ -166,6 +166,7 @@
                 }
             }
             map.geoObjects.add(clusterer);
+
         }
 
         function update() {
@@ -206,78 +207,88 @@
             map.geoObjects.add(clusterer);
         }
     </script>
-    <div class="dropdown">
-        <button class="btn btn-success dropdown-toggle" type="button" id="multiSelectDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-            Тип заведения
-        </button>
-        <ul class="dropdown-menu" aria-labelledby="multiSelectDropdown">
-            <li>
-                <label>
-                    <input type="checkbox" id="cafeCB" checked value="Кафе">
-                    Кафе
-                </label>
-            </li>
-            <li>
-                <label>
-                    <input type="checkbox" id="restCB" checked value="Ресторан">
-                    Ресторан
-                </label>
-            </li>
-            <li>
-                <label>
-                    <input type="checkbox" id="ffCB" checked value="Фастфуд">
-                    Фастфуд
-                </label>
-            </li>
-            <li>
-                <label>
-                    <input type="checkbox" id="barCB" checked value="Бар">
-                    Бар
-                </label>
-            </li>
-            <li>
-                <label>
-                    <input type="checkbox" id="dinerCB" checked value="Столовая">
-                    Столовая
-                </label>
-            </li>
-            <li>
-                <label>
-                    <input type="checkbox" id="cftCB" checked value="Кафетерий">
-                    Кафетерий
-                </label>
-            </li>
-            <li>
-                <label>
-                    <input type="checkbox" id="buffetCB" checked value="Буфет">
-                    Буфет
-                </label>
-            </li>
-            <li>
-                <label>
-                    <input type="checkbox" id="snackCB" checked value="Закусочная">
-                    Закусочная
-                </label>
-            </li>
-            <li>
-                <label>
-                    <input type="checkbox" id="cookCB" checked value="Кулинария">
-                    Кулинария
-                </label>
-            </li>
-        </ul>
-        <button id="filterBtn">Применить фильтр</button>
-        <script>
-            document.querySelector('#filterBtn').onclick = function() {
-                update();
-            }
-        </script>
-    </div>
-    </div>
-
 
     <div class='container p-5 my-5 border align-items-center'>
+        <div class="dropdown">
+            <button class="btn btn-success dropdown-toggle" type="button" id="multiSelectDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                Тип заведения
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="multiSelectDropdown">
+                <li>
+                    <label>
+                        <input type="checkbox" id="cafeCB" checked value="Кафе">
+                        Кафе
+                    </label>
+                </li>
+                <li>
+                    <label>
+                        <input type="checkbox" id="restCB" checked value="Ресторан">
+                        Ресторан
+                    </label>
+                </li>
+                <li>
+                    <label>
+                        <input type="checkbox" id="ffCB" checked value="Фастфуд">
+                        Фастфуд
+                    </label>
+                </li>
+                <li>
+                    <label>
+                        <input type="checkbox" id="barCB" checked value="Бар">
+                        Бар
+                    </label>
+                </li>
+                <li>
+                    <label>
+                        <input type="checkbox" id="dinerCB" checked value="Столовая">
+                        Столовая
+                    </label>
+                </li>
+                <li>
+                    <label>
+                        <input type="checkbox" id="cftCB" checked value="Кафетерий">
+                        Кафетерий
+                    </label>
+                </li>
+                <li>
+                    <label>
+                        <input type="checkbox" id="buffetCB" checked value="Буфет">
+                        Буфет
+                    </label>
+                </li>
+                <li>
+                    <label>
+                        <input type="checkbox" id="snackCB" checked value="Закусочная">
+                        Закусочная
+                    </label>
+                </li>
+                <li>
+                    <label>
+                        <input type="checkbox" id="cookCB" checked value="Кулинария">
+                        Кулинария
+                    </label>
+                </li>
+            </ul>
+            <button class="btn btn-success" id="filterBtn">Применить фильтр</button>
+            <script>
+                document.querySelector('#filterBtn').onclick = function() {
+                    update();
+                }
+            </script>
+        </div>
         <div id="map" class="map"></div>
+    </div>
+    <div class='container p-5 my-5 align-items-center'>
+        <h4>Легенда</h4>
+        <img src="icons\Кафе.svg" class="icon" alt=""> - Кафе
+        <img src="icons\Ресторан.svg" class="icon" alt=""> - Ресторан
+        <img src="icons\Бар.svg" class="icon" alt=""> - Бар
+        <img src="icons\Буфет.svg" class="icon" alt=""> - Буфет
+        <img src="icons\Закусочная.svg" class="icon" alt=""> - Закусочная
+        <img src="icons\Кафетерий.svg" class="icon" alt=""> - Кафетерий
+        <img src="icons\Фастфуд.svg" class="icon" alt=""> - Фастфуд
+        <img src="icons\Магазин.svg" class="icon" alt=""> - Кулинария
+        <img src="icons\Столовая.svg" class="icon" alt=""> - Столовая
     </div>
 </body>
 
