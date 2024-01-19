@@ -12,10 +12,50 @@
 </head>
 
 <body>
-    <?php
+    <?php 
     include('db.php');
     include('session.php');
-    include('header.php');
+    include('header.php'); ?>
+    <div class="container p-5 my-5 border align-items-center">
+        <div class="row text-center">
+            <h1>Сервис FoodiMap</h1>
+        </div>
+        <div class="row">
+            <div class="col-4">
+                <img src="icons\Лого.png" class="logo1">
+            </div>
+            <div class="col-8">
+                <p>FoodiMap - это веб-приложение, которое позволяет пользователям искать места общественного питания на карте. Приложение предоставляет возможность поиска ресторанов, кафе, баров и других заведений. Пользователи могут просматривать различную информацию о заведениях, такую как адрес, скидки, номер телефона и так далее. Также можно оставлять просматривать отзывы на все заведения (чтобы оставить отзыв необходимо авторизоваться). FoodiMap будет вам отличным помощником, если вы ищете где перекусить.</p>
+                <p><b>Как пользоваться: </b>На карте вы можете найти любое заведение в Москве. С помощью фильтра можно выбрать тип отображаемых заведений. Также, нажав на метку, вы можете перейти на страницу с информацией каждого заведения и просмотреть существующие отзывы или написать свой собственный.</p>
+                <p>Данные взяты с портала открытых данных города Москва: <a href="https://data.mos.ru/opendata/1903?pageSize=10&pageIndex=0&isDynamic=false&version=1&release=155">Ссылка</a></p>
+                <p>Контакты для обратной связи:</p>
+                <p>Почта: foodimap@gmail.com</p>
+            </div>
+        </div>
+    </div>
+    <?php
+
+    $result2 = mysqli_query($mysql, "SELECT * FROM feedbacks JOIN users ON user_id=users.id JOIN places on places.id=feedbacks.place_id order by date_time desc LIMIT 5");
+
+    $content = "";
+    while ($page = mysqli_fetch_assoc($result2)) {
+        $content .= "<div class=\"card\">
+            <div class=\"card-header\">
+            " . $page['login'] . "  про <a href='page.php?id=" . $page["place_id"] . "'>" . $page['Name'] . "</a>
+            </div>
+            <div class=\"card-body\">
+              <blockquote class=\"blockquote mb-0\">
+                <p>Оценка: " . $page['rating'] . "</p>
+                <p>" . $page['content'] . "</p>
+              </blockquote>
+            </div>
+          </div>";
+    }
+    echo "<div class='container p-5 my-5 border align-items-center'>";
+    echo "<h2>Последние отзывы: </h2>";
+    echo $content;
+    echo "</div>";
+
 
     $result = mysqli_query($mysql, "SELECT * FROM `places`");
     while ($row = mysqli_fetch_assoc($result)) {
@@ -25,18 +65,10 @@
     <script type="text/javascript">
         ymaps.ready(init);
         var map;
-        var cookCollection;
-        var cafeCollection;
-        var restCollection;
-        var ffCollection;
-        var barCollection;
-        var dinerCollection;
-        var snackCollection;
-        var cafeteriaCollection;
-        var buffetCollection;
 
         var clusterer;
 
+        var myCollection;
 
         var myGeoObjects = {
             cafes: [],
@@ -70,7 +102,8 @@
             map.controls.remove('fullscreenControl'); // удаляем кнопку перехода в полноэкранный режим
             map.controls.remove('zoomControl'); // удаляем контрол зуммирования
             map.controls.remove('rulerControl'); // удаляем контрол правил
-            // map.behaviors.disable(['scrollZoom']); // отключаем скролл карты (опционально)
+
+            myCollection = new ymaps.GeoObjectCollection();
 
             <?php foreach ($ar as $row) : ?>
                 switch ("<?php echo $row['TypeObject'] ?>") {
@@ -116,7 +149,7 @@
                     iconImageSize: [30, 30],
                     iconImageOffset: [-20, -23]
                 });
-                myCollection = new ymaps.GeoObjectCollection();
+
                 switch ("<?php echo $row['TypeObject'] ?>") {
                     case 'кафе':
                         myCollection.add(myPlacemark);
@@ -159,7 +192,6 @@
 
             <?php endforeach; ?>
             map.geoObjects.add(myCollection);
-            // myGeoObjects.forEach((element) => clusterer.add(element));
             for (var key in myGeoObjects) {
                 if (myGeoObjects.hasOwnProperty(key)) {
                     clusterer.add(myGeoObjects[key])
@@ -210,7 +242,7 @@
 
     <div class='container p-5 my-5 border align-items-center'>
         <div class="dropdown">
-            <button class="btn btn-success dropdown-toggle" type="button" id="multiSelectDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+            <button class="btn dropdown-toggle" type="button" id="multiSelectDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                 Тип заведения
             </button>
             <ul class="dropdown-menu" aria-labelledby="multiSelectDropdown">
@@ -269,9 +301,9 @@
                     </label>
                 </li>
             </ul>
-            <button class="btn btn-success" id="filterBtn">Применить фильтр</button>
+            <button class="btn" id="btn">Применить фильтр</button>
             <script>
-                document.querySelector('#filterBtn').onclick = function() {
+                document.querySelector('#btn').onclick = function() {
                     update();
                 }
             </script>

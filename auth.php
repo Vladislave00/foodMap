@@ -11,12 +11,14 @@
 </head>
 
 <body>
-    <h1>Авторизация</h1>
     <?php
 
     if (isset($_SESSION['login'])) echo '<h1>Вход уже был выполнен</h1>';
     else {
-        echo '<form action="auth.php" method="post" class="auth-form">
+        echo '
+            <div class="container col-3 p-5 my-5 border align-items-center justify-content-center">
+            <h1>Авторизация</h1>
+            <form action="auth.php" method="post" class="auth-form">
             <div class="auth-form__element">
             <label for="login">Введите логин</label>
             <input type="login" id="login" name="login">
@@ -26,7 +28,8 @@
             <input type="password" id="password" name="password">
             </div>
             <button type="submit">Войти</button>
-            </form>';
+            </form>
+            </div>';
     }
     ?>
 

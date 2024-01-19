@@ -11,7 +11,8 @@
 </head>
 
 <body>
-    <div class="container-fluid align-items-center justify-content-center" id="box">
+<form method="POST" action="">
+    <div class="container col-3 p-5 my-5 border align-items-center justify-content-center" id="box">
         <h1>Регистрация</h1>
         <div class="field">
             <div class="lab"><label for="username">Логин</label></div>
@@ -34,7 +35,6 @@
     </div>
     <div class="main_content">
         <!-- HTML форма для регистрации -->
-        <form method="POST" action="">
 
             <?php
             include 'db.php';

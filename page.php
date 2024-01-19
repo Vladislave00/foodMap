@@ -30,10 +30,10 @@
 
     echo "<div class='container p-5 my-5 border align-items-center'>";
     echo "<h1>" . $row['Name'] . "</h1>";
+    echo "<b><p>Средний рейтинг: " . $avgRating["r"] . "</p></b>";
     echo "<p>Адрес: " . $row["Address"] . "</p>";
     echo "<p>" . $row["PublicPhone"] . "</p>";
     echo "<p>Социальные скидки: " . $row["SocialPrivileges"] . "</p>";
-    echo "<p>Средний рейтинг: " . $avgRating["r"] . "</p>";
     echo "</div>";
     $result2 = mysqli_query($mysql, "SELECT * FROM feedbacks JOIN users ON user_id=users.id WHERE place_id = " . $placeId . "");
 
@@ -83,7 +83,7 @@
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $rating = $_POST["rating"];
 
-        $sql = "SELECT id FROM feedbacks WHERE place_id = " . $placeId . "";
+        $sql = "SELECT id FROM feedbacks WHERE user_id = " . $user_id. "";
         $result1 = mysqli_query($mysql, $sql);
 
         if (mysqli_num_rows($result1) > 0) {

@@ -31,7 +31,6 @@
                 <p>Данные взяты с портала открытых данных города Москва: <a href="https://data.mos.ru/opendata/1903?pageSize=10&pageIndex=0&isDynamic=false&version=1&release=155">Ссылка</a></p>
                 <p>Контакты для обратной связи:</p>
                 <p>Почта: foodimap@gmail.com</p>
-                <p>Телефон: +7-985-852-52-52</p>
             </div>
         </div>
     </div>

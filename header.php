@@ -1,10 +1,12 @@
-<header class="p-3 bg-dark text-white">
+<header class="p-3 text-white" id="header">
     <div class="container">
         <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-            <a href="index.php"><img src="icons\Лого.png" class="logo"></a>
+            
             <ul class="nav col-4 col-lg-auto me-lg-auto mb-2 mb-md-0">
-                <!-- <li><a href="index.php" class="nav-link px-2 text-white">Главная</a></li> -->
-                <li><a href="about.php" class="nav-link px-2 text-white">О нас</a></li>
+                
+                <!-- <li><a href="about.php" class="nav-link px-2 text-white">О нас</a></li> -->
+                <a href="index.php"><img src="icons\Лого.png" class="logo"></a>
+                <li><a class="nav-link px-2 text-white" id="logotext">Сайт для поиска мест общественного питания</a></li>
             </ul>
 
             <div class="text-end">
